@@ -36,8 +36,7 @@ router.get("/newArticles", function(req, res) {
             });
             //checking to make sure newArticle contains a storyUrl
             if (newArticle.storyUrl) {
-              //checking if new article matches any saved article, if not add it to array
-              //of new articles
+          
               if (!savedHeadlines.includes(newArticle.headline)) {
                 newArticleArr.push(newArticle);
               }
@@ -47,12 +46,12 @@ router.get("/newArticles", function(req, res) {
           //adding all new articles to database
           db.Article
             .create(newArticleArr)
-            .then(result => res.json({count: newArticleArr.length}))//returning count of new articles to front end
+            .then(result => res.json({count: newArticleArr.length}))
             .catch(err => {});
         })
         .catch(err => console.log(err)); //end of rp method
     })
     .catch(err => console.log(err)); //end of db.Article.find()
-});// end of get request to /scrape
+});
 
 module.exports = router;
